@@ -1,0 +1,7 @@
+apiVersion: pbench.cloudbulldozer.io/v1alpha1
+kind: Pbench
+metadata:
+  name: example-pbench
+spec:
+  # Add fields here
+  size: 3

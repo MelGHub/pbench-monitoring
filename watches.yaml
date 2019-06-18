@@ -1,0 +1,5 @@
+---
+- version: v1alpha1
+  group: pbench.cloudbulldozer.io
+  kind: Pbench
+  playbook: /opt/ansible/playbook.yml

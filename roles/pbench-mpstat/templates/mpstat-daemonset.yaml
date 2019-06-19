@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: "DaemonSet"
+metadata:
+  name: "{{ meta.name }}-mpstat"
+  namespace: "{{  metadata.namespace }}"
+spec:
+  template:
+    metadata:
+      labels:
+       app: mpstat
+    spec:
+      containers:
+      - name: mpstat
+        command: ["/bin/sh", "-c"]
+        args: |
+          - "while true; do
+            if [[ $(redis-cli -h {{bo.resources[0].status.podIP}} get start_collection ) =~ 'true' ]]; then
+              LANG=C /usr/local/bin/mpstat -P ALL {{ interval }} > /tmp/mpstat-out &;
+            fi;
+            if [[ $(redis-cli -h {{bo.resources[0].status.podIP}} get stop_collection ) =~ 'true' ]]; then
+              break;
+            fi;
+            sleep 5;
+          done;"
+        image: "{{ image }}"
+      restartPolicy: OnFailure

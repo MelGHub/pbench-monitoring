@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: "DaemonSet"
 metadata:
   name: "{{ meta.name }}-mpstat"
-  namespace: "{{  metadata.namespace }}"
+  namespace: "{{  meta.namespace }}"
 spec:
   template:
     metadata:

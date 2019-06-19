@@ -1,2 +1,7 @@
 ---
-# tasks file for pbench-mpstat
+
+- name: Start mpstat daemonset
+  k8s:
+    state: present
+    definition: "{{ lookup('template', 'mpstat-daemonset.yaml') | from_yaml }}"
+
